@@ -1,0 +1,6 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9618fbf4_002Db91d_002D43f0_002Da444_002D2c0632140527/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="VerifyScrollingDownToFireInvestigationPage" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::A9F2918D-5B9B-4F1E-8624-32D96DD7298C::.NETCoreApp,Version=v3.1::WebsiteSeleniumFunctionalTests.WebsiteSeleniumFunctionalTests.VerifyScrollingDownToFireInvestigationPage&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
