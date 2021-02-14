@@ -25,6 +25,9 @@ namespace WebsiteSeleniumFunctionalTests
             _seleniumDriver.Navigate().GoToUrl("https://davies-group.com/");
         }
         
+        /// <summary>
+        ///  To verify clicking the social media icon takes to the respective page.
+        /// </summary>
         [TestCase("Twitter")]
         [TestCase("linkedIn")]
         public void VerifyClickingTheSocialMediaIconNavigatesToTheRespectivePage(string socialNetworkName)
@@ -59,11 +62,16 @@ namespace WebsiteSeleniumFunctionalTests
             Assert.AreNotEqual(correctSocialNetworkUrl, mainPageUrl);
         }
 
+        /// <summary>
+        ///  To verify clicking  'Solutions' -> 'View All' -> 'Fire Investigation' case study takes to the page.
+        /// </summary>
         [Test]
         public void VerifyScrollingDownToFireInvestigationPageIsWorkingAsExpected()
         {
             //Act
             IJavaScriptExecutor jsExecutor = _seleniumDriver;
+            var expectedFireInvestigationUrl = "https://davies-group.com/case-study/fire-investigation/";
+            var mainPageUrl = _seleniumDriver.FindElementByTagName("a").GetAttribute("href");
             var solutionButton = _seleniumDriver.FindElementByCssSelector("#menu-item-18257 > a");
             jsExecutor.ExecuteScript("arguments[0].click();", solutionButton);
 
@@ -76,17 +84,19 @@ namespace WebsiteSeleniumFunctionalTests
             // Scroll down to View All and load more case study as 'Fire Investigation' is not on the first page.
             var viewAllElement = _seleniumDriver.FindElementByCssSelector("body > div.page-wrapper > div > section.dg-cases-section.dg-cases-section--solutions > div > ul");
             jsExecutor.ExecuteScript("arguments[0].scrollIntoView(true);", viewAllElement);
+
             Thread.Sleep(20000);
             var viewAllButton = _seleniumDriver.FindElementByCssSelector(
                 "body > div.page-wrapper > div > section.dg-cases-section.dg-cases-section--solutions > div > div > a > p");
             jsExecutor.ExecuteScript("arguments[0].click();", viewAllButton);
 
-            var loadMoreButton = _seleniumDriver.FindElementByCssSelector(
-                "body > div.page-wrapper > div > section.case-archive > div.case-archive__body.bg--dark-blue > div > div.case-archive__footer.flex-container.align-center.align-middle > button");
+            Thread.Sleep(20000);
+             var loadMoreButton = _seleniumDriver.FindElementByCssSelector(
+                 "body > div.page-wrapper > div > section.case-archive > div.case-archive__body.bg--dark-blue > div > div.case-archive__footer.flex-container.align-center.align-middle > button");
             jsExecutor.ExecuteScript("arguments[0].click();", loadMoreButton);
-            Thread.Sleep(30000);
+            Thread.Sleep(20000);
             jsExecutor.ExecuteScript("arguments[0].click();", loadMoreButton);
-            Thread.Sleep(30000);
+            Thread.Sleep(20000);
 
             // Check the fire investigation text is in the body and scroll down and click the button
             var body = _seleniumDriver.FindElementByCssSelector(
@@ -101,15 +111,23 @@ namespace WebsiteSeleniumFunctionalTests
                 "body > div.page-wrapper > div > section.case-archive > div.case-archive__body.bg--dark-blue > div > div.case-archive__post-list.position-relative > ul:nth-child(3) > li:nth-child(1) > a > div.dg-cases-section__thumbnail > img");
             jsExecutor.ExecuteScript("arguments[0].click();", fireInvestigation);
 
+            Thread.Sleep(20000);
+            var fireInvestigationUrl =  _seleniumDriver.FindElementByCssSelector("head > link:nth-child(15)").GetAttribute("href");
+
+
             // Take the screenshot and save in the file.
             Thread.Sleep(30000);
             ITakesScreenshot screenShot = _seleniumDriver;
             screenShot.GetScreenshot().SaveAsFile("C:\\Screenshots\\FireInvestigationCaseStudy.png");
 
             //Assert
+            Assert.AreEqual(expectedFireInvestigationUrl, fireInvestigationUrl);
             Assert.IsTrue(File.Exists("C:\\Screenshots\\FireInvestigationCaseStudy.png"));
         }
 
+        /// <summary>
+        ///  Capture the location of Stoke office by going through 'About Us' -> 'Locations' menu.
+        /// </summary>
         [Test]
         public void CaptureStokeOfficeAddressFromTheMap()
         {
